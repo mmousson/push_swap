@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 04:23:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/08 09:33:27 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/08 11:04:41 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ char	*brute_force(t_holder *holder, int moves, char *result, char *tmp)
 {
 	int				i;
 
-	ft_putendl("Recursive brute force");
-	ft_putendl(tmp);
+	// ft_putendl("Recursive brute force");
+	ft_putendl(result);
 	if ((ft_is_sorted(*(holder->a_head))
-			&& ft_lst_depth(*(holder->b_head)) == 0) || moves >= 12)
+			&& ft_lst_depth(*(holder->b_head)) == 0) || moves >= 12
+		|| (*result != '\0' && ft_strlen(result) < ft_strlen(tmp)))
 	{
 		if (ft_strlen(result) > ft_strlen(tmp) || *result == '\0')
 			ft_strcpy(result, tmp);

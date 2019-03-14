@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   is_sorted.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 00:31:26 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/11 19:40:47 by mmousson         ###   ########.fr       */
+/*   Created: 2019/03/12 06:41:59 by mmousson          #+#    #+#             */
+/*   Updated: 2019/03/12 06:42:07 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *str1, const void *str2, size_t n)
+int					ft_is_sorted(t_list *stack_a)
 {
-	char *src;
-	char *dest;
+	long int	tmp;
 
-	if (str1 == str2)
-		return (str1);
-	src = (char *)str2;
-	dest = (char *)str1;
-	if (str2 < str1)
+	tmp = -2147483648;
+	while (stack_a)
 	{
-		while ((int)n--)
-			dest[n] = src[n];
+		if (*((long int *)(stack_a->content)) < tmp)
+			return (0);
+		else
+			tmp = *((long int *)(stack_a->content));
+		stack_a = stack_a->next;
 	}
-	else
-		ft_memcpy(str1, str2, n);
-	return (str1);
+	return (1);
 }

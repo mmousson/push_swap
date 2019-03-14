@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_dmax.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 00:31:26 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/11 19:40:47 by mmousson         ###   ########.fr       */
+/*   Created: 2019/03/05 21:37:02 by mmousson          #+#    #+#             */
+/*   Updated: 2019/03/06 03:05:52 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdarg.h>
 
-void	*ft_memmove(void *str1, const void *str2, size_t n)
+double	ft_dmax(int count, ...)
 {
-	char *src;
-	char *dest;
+	va_list	ap;
+	double	tmp;
+	double	max;
 
-	if (str1 == str2)
-		return (str1);
-	src = (char *)str2;
-	dest = (char *)str1;
-	if (str2 < str1)
+	va_start(ap, count);
+	max = __DBL_MIN__;
+	while (count-- > 0)
 	{
-		while ((int)n--)
-			dest[n] = src[n];
+		tmp = va_arg(ap, double);
+		if (tmp > max)
+			max = tmp;
 	}
-	else
-		ft_memcpy(str1, str2, n);
-	return (str1);
+	va_end(ap);
+	return (max);
 }

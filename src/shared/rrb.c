@@ -6,13 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 02:04:52 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/08 09:08:29 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/13 19:33:25 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_reverse_rotate_b(t_list **stack_b, t_list **stack_a, int write)
+void	ft_reverse_rotate_b(t_list **stack_a, t_list **stack_b, int write)
 {
 	t_list	*head;
 	t_list	*tail;

@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_dmin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 00:31:26 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/11 19:40:47 by mmousson         ###   ########.fr       */
+/*   Created: 2019/03/05 21:42:36 by mmousson          #+#    #+#             */
+/*   Updated: 2019/03/06 03:05:48 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdarg.h>
 
-void	*ft_memmove(void *str1, const void *str2, size_t n)
+double	ft_dmin(int count, ...)
 {
-	char *src;
-	char *dest;
+	va_list	ap;
+	double	tmp;
+	double	min;
 
-	if (str1 == str2)
-		return (str1);
-	src = (char *)str2;
-	dest = (char *)str1;
-	if (str2 < str1)
+	va_start(ap, count);
+	min = __DBL_MAX__;
+	while (count-- > 0)
 	{
-		while ((int)n--)
-			dest[n] = src[n];
+		tmp = va_arg(ap, double);
+		if (tmp < min)
+			min = tmp;
 	}
-	else
-		ft_memcpy(str1, str2, n);
-	return (str1);
+	va_end(ap);
+	return (min);
 }

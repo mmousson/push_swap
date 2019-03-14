@@ -6,13 +6,13 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 01:32:29 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/08 09:14:43 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/13 19:33:51 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_swap_b(t_list **stack_b, t_list **stack_a, int write)
+void	ft_swap_b(t_list **stack_a, t_list **stack_b, int write)
 {
 	t_list	*curr;
 	t_list	*tmp;

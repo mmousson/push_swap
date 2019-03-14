@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strendswith.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 00:31:26 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/11 19:40:47 by mmousson         ###   ########.fr       */
+/*   Created: 2018/12/18 18:04:10 by mmousson          #+#    #+#             */
+/*   Updated: 2019/01/22 01:54:19 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *str1, const void *str2, size_t n)
+int	ft_strendswith(char *str, const char *end)
 {
-	char *src;
-	char *dest;
+	size_t	end_len;
+	size_t	str_len;
 
-	if (str1 == str2)
-		return (str1);
-	src = (char *)str2;
-	dest = (char *)str1;
-	if (str2 < str1)
+	if (str == NULL || end == NULL || *str == '\0')
+		return (0);
+	end_len = ft_strlen(end);
+	str_len = ft_strlen(str);
+	str += str_len - end_len;
+	while (*str != '\0' && *end != '\0')
 	{
-		while ((int)n--)
-			dest[n] = src[n];
+		if (*str != *end)
+			return (0);
+		str++;
+		end++;
 	}
+	if (*str == '\0' && *end == '\0')
+		return (1);
 	else
-		ft_memcpy(str1, str2, n);
-	return (str1);
+		return (0);
 }

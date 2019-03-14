@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_lstdepth.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 00:31:26 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/11 19:40:47 by mmousson         ###   ########.fr       */
+/*   Created: 2019/03/12 06:31:21 by mmousson          #+#    #+#             */
+/*   Updated: 2019/03/12 06:37:21 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *str1, const void *str2, size_t n)
+int	ft_lstdepth(t_list *list)
 {
-	char *src;
-	char *dest;
+	int	ret;
 
-	if (str1 == str2)
-		return (str1);
-	src = (char *)str2;
-	dest = (char *)str1;
-	if (str2 < str1)
+	ret = 0;
+	while (list)
 	{
-		while ((int)n--)
-			dest[n] = src[n];
+		ret++;
+		list = list->next;
 	}
-	else
-		ft_memcpy(str1, str2, n);
-	return (str1);
+	return (ret);
 }

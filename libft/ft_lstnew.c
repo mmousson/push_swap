@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:56:50 by mmousson          #+#    #+#             */
-/*   Updated: 2018/11/12 23:20:06 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/11 20:13:29 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	t_list *new;
 
 	if (!(new = (t_list *)malloc(sizeof(t_list)))
-		|| !(new->content = malloc(content_size)))
+			|| !(new->content = content_size ? malloc(content_size) : NULL))
 	{
 		if (new)
 			free(new);

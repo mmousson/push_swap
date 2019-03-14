@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 23:03:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/08 09:09:51 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/12 06:35:01 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int		ft_next_to_send_is_on_top(t_list *stack_a, long int median)
 	int	depth;
 
 	counter = 0;
-	depth = ft_lst_depth(stack_a);
+	depth = ft_lstdepth(stack_a);
 	while (stack_a)
 	{
 		if (*((long int *)(stack_a->content)) <= median)

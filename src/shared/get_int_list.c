@@ -6,12 +6,11 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 02:13:27 by mmousson          #+#    #+#             */
-/*   Updated: 2018/12/20 03:27:49 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/12 06:38:45 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "ft_printf.h"
 #include <limits.h>
 
 static int		ft_check_args(int argc, char **argv)

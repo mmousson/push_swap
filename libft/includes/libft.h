@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 02:11:28 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/08 00:30:19 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/12 06:36:05 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <stdlib.h>
 # include <string.h>
 
+# define BUFF_SIZE 1664
+
+char				*ft_strapp(char *str, char c);
 void				ft_putchar(int c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);
@@ -25,10 +28,11 @@ void				ft_putllong(long long ll);
 void				ft_putfloat(float f);
 size_t				ft_strlen(const char *str);
 void				ft_bzero(void *s, size_t n);
+long int			ft_atol(const char *s);
 int					ft_atoi(const char *str);
-long int			ft_atol(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
+int					ft_isxdigit(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
@@ -82,6 +86,8 @@ char				*ft_strmultiply(char *factor1, char *factor2,
 char				*ft_strdivide_two(char *str);
 void				*ft_rotate_left(void *array, size_t array_size, size_t n,
 						size_t data_size);
+int					get_next_line(const int fd, char **line);
+int					ft_strendswith(char *str, const char *end);
 
 typedef	struct		s_list
 {
@@ -90,7 +96,13 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-int					ft_lst_depth(t_list *list);
+union				u_fabs_matcher
+{
+	double			double_corres;
+	unsigned long	int_corres;
+};
+
+int					ft_lstdepth(t_list *list);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
@@ -101,7 +113,10 @@ void				ft_lstpush(t_list **alst, t_list *new);
 
 int					ft_abs(int x);
 int					ft_min(int x, int y);
+double				ft_dmin(int count, ...);
 int					ft_max(int x, int y);
+double				ft_dmax(int count, ...);
 int					ft_clamp(int x, int low, int high);
+double				ft_fabs(double x);
 
 #endif

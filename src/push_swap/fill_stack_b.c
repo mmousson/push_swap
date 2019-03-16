@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 23:03:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/16 02:51:14 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/16 04:25:30 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static long int	ft_stack_max(t_list *stack_x)
 	return (res);
 }
 
-static long int	ft_find_threshold(t_list *stack_a)
+static long int	ft_find_threshold(t_list *stack_a, double lerp_factor)
 {
 	long int	count;
 	long int	sum;
@@ -41,7 +41,7 @@ static long int	ft_find_threshold(t_list *stack_a)
 		sum += *((long int *)(stack_a->content));
 		stack_a = stack_a->next;
 	}
-	return (count != 0 ? sum / (count * 4) : 0);
+	return (count != 0 ? sum / (count * lerp_factor) : 0);
 }
 
 /*
@@ -66,7 +66,7 @@ static void		ft_move_stack(t_list *stack_a, t_list **stack_a_head,
 			|| tmp >= max - threshold)
 			if ((index < depth / 2 && cur == -1)
 				|| (index >= depth / 2 && (depth - index < cur || cur == -1)))
-					cur = index;
+				cur = index;
 		index++;
 		stack_a = stack_a->next;
 	}
@@ -78,7 +78,8 @@ static void		ft_move_stack(t_list *stack_a, t_list **stack_a_head,
 			ft_rotate_a(stack_a_head, NULL, 1);
 }
 
-void			fill_stack_b(t_list **stack_a_head, t_list **stack_b_head)
+void			fill_stack_b(t_list **stack_a_head, t_list **stack_b_head,
+	double lerp_factor)
 {
 	t_list		*stack_a;
 	t_list		*stack_b;
@@ -90,7 +91,7 @@ void			fill_stack_b(t_list **stack_a_head, t_list **stack_b_head)
 	stack_b = *stack_b_head;
 	while (stack_a != NULL)
 	{
-		threshold = ft_find_threshold(stack_a);
+		threshold = ft_find_threshold(stack_a, lerp_factor);
 		ft_move_stack(stack_a, &stack_a, threshold, ft_stack_max(stack_a));
 		ft_push_b(&stack_a, &stack_b, 1);
 		if (*((long int *)(stack_b->content)) <= threshold)

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 04:23:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/15 23:07:46 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/16 04:25:09 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ static void		delete_last(char *buffer)
 		ft_bzero(pos - 3, 4);
 }
 
-int				brute_force(t_holder *holder, int moves, char *result, char *tmp)
+int				brute_force(t_holder *holder, int moves, char *result,
+	char *tmp)
 {
 	int		i;
 
-	if ((ft_is_sorted(*(holder->a_head)) && ft_lstdepth(*(holder->b_head)) == 0))
+	if (ft_is_sorted(*(holder->a_head))
+		&& ft_lstdepth(*(holder->b_head)) == 0)
 	{
 		ft_strcpy(result, tmp);
 		return (1);

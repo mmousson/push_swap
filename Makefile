@@ -6,7 +6,7 @@
 #    By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/15 03:28:51 by mmousson          #+#    #+#              #
-#    Updated: 2019/03/16 03:09:18 by mmousson         ###   ########.fr        #
+#    Updated: 2019/03/16 04:23:09 by mmousson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ all: lib_rule $(NAME_PS) $(NAME_CHECK)
 		printf "\033[1;31m      [PUSH_SWAP: NOTHING TO BE DONE]\033[0m\n"; \
 	fi;
 	@rm -f ps_chk_relink
+	@rm -f files_missing
 
 lib_rule:
 	@$(MAKE) --no-print-directory -C libft

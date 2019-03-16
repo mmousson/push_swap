@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 01:09:55 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/13 23:05:53 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/16 03:13:35 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ t_list				*ft_get_int_list(int argc, char **argv);
 **	Shared functions
 */
 
-t_list				*ft_free_samere(t_list *integers);
+t_list				*ft_free_samere(t_list *integers, long int *current);
 
 #endif

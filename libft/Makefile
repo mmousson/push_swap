@@ -97,7 +97,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 	@if [ ! -e libft_link ]; then \
-		printf "\033[1;31m[LIBFT: NOTHING TO BE DONE]\033[0m\n"; \
+		printf "\033[1;31m        [LIBFT: NOTHING TO BE DONE]\033[0m\n"; \
 	fi;
 	@rm -f libft_link
 
@@ -106,7 +106,7 @@ all: $(NAME)
 		rm -rf $(LOGFOLDER) \
 		/bin/mkdir $(LOGFOLDER) \
 		/bin/echo ""; \
-		/bin/echo -n "COMPILING LIBFT STATIC LIBRARY... "; \
+		/bin/echo -n "COMPILING LIBFT STATIC LIBRARY..."; \
 	fi;
 	@/usr/bin/touch libft_link
 	@$(CC) -c $< $(CFLAGS) -o $@ 2> $(LOGFOLDER)/tmp.log || /usr/bin/touch $(LOGFOLDER)/tmp.errors
@@ -117,7 +117,7 @@ $(NAME): $(OBJ)
 	@if [ -e libft_link ]; then \
 		ar rc $(NAME) $(OBJ); \
 		ranlib $(NAME); \
-		echo "	 \x1b[1;32m[LIBFT READY]\x1b[0m\n"; \
+		echo "	\x1b[1;32m[LIBFT READY]\x1b[0m\n"; \
 	fi;
 
 clean:

@@ -6,22 +6,12 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 04:23:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/14 01:30:22 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/15 23:07:46 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
-#include <stdio.h>
-
-void			print_list(t_list *stack)
-{
-	while (stack)
-	{
-		printf("%ld\n", *((long int *)(stack->content)));
-		stack = stack->next;
-	}
-}
 
 static void		delete_last(char *buffer)
 {
@@ -31,33 +21,6 @@ static void		delete_last(char *buffer)
 		ft_bzero(pos - 3, 4);
 }
 
-// static long		get_hash(t_list *stack)
-// {
-// 	long	res;
-
-// 	res = 7;
-// 	while (stack)
-// 	{
-// 		res = res * 10 + *((long int *)(stack->content));
-// 		stack = stack->next;
-// 	}
-// 	return (res);
-// }
-
-// static long		update_hash(t_holder *holder)
-// {
-// 	long 			tmp;
-// 	t_list			*bkp_a;
-// 	t_list			*bkp_b;
-
-// 	bkp_a = *(holder->a_head);
-// 	bkp_b = *(holder->b_head);
-// 	tmp = get_hash(*(holder->a_head));
-// 	tmp += get_hash(*(holder->b_head));
-// 	*(holder->a_head) = bkp_a;
-// 	*(holder->b_head) = bkp_b;
-// 	return (tmp);
-// }
 int				brute_force(t_holder *holder, int moves, char *result, char *tmp)
 {
 	int		i;

@@ -6,57 +6,29 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 23:03:15 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/12 06:35:01 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/16 02:51:14 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
 
-static int		ft_are_top_two_smallest(t_list *stack_b)
+static long int	ft_stack_max(t_list *stack_x)
 {
-	long int	top1;
-	long int	top2;
-	long int	catch;
+	long int	res;
+	long int	tmp;
 
-	if (stack_b == NULL || stack_b->next == NULL)
-		return (0);
-	top1 = *((long int *)(stack_b->content));
-	top2 = *((long int *)(stack_b->next->content));
-	stack_b = stack_b->next->next;
-	while (stack_b != NULL)
+	res = __LONG_MAX__ * (-1);
+	while (stack_x)
 	{
-		catch = *((long int *)(stack_b->content));
-		if(catch < top1 || catch < top2)
-			return (0);
-		stack_b = stack_b->next;
+		if ((tmp = (*(long int *)(stack_x->content))) > res)
+			res = tmp;
+		stack_x = stack_x->next;
 	}
-	return (1);
+	return (res);
 }
 
-static int		ft_next_to_send_is_on_top(t_list *stack_a, long int median)
-{
-	int	counter;
-	int	depth;
-
-	counter = 0;
-	depth = ft_lstdepth(stack_a);
-	while (stack_a)
-	{
-		if (*((long int *)(stack_a->content)) <= median)
-		{
-			if (counter < depth / 2)
-				return (1);
-			else
-				return (0);
-		}
-		counter++;
-		stack_a = stack_a->next;
-	}
-	return (0);
-}
-
-static long int	ft_find_median(t_list *stack_a)
+static long int	ft_find_threshold(t_list *stack_a)
 {
 	long int	count;
 	long int	sum;
@@ -69,34 +41,60 @@ static long int	ft_find_median(t_list *stack_a)
 		sum += *((long int *)(stack_a->content));
 		stack_a = stack_a->next;
 	}
-	return (count != 0 ? sum / count : 0);
+	return (count != 0 ? sum / (count * 4) : 0);
+}
+
+/*
+**	This function moves the stack so it will be ready fot the next push
+**	Its return value tells us if we must rotate the stack_b afterwrds
+*/
+
+static void		ft_move_stack(t_list *stack_a, t_list **stack_a_head,
+	long threshold, long max)
+{
+	int			index;
+	int			cur;
+	int			depth;
+	long int	tmp;
+
+	index = 0;
+	cur = -1;
+	depth = ft_lstdepth(stack_a);
+	while (stack_a)
+	{
+		if ((tmp = (*(long int *)(stack_a->content))) <= threshold
+			|| tmp >= max - threshold)
+			if ((index < depth / 2 && cur == -1)
+				|| (index >= depth / 2 && (depth - index < cur || cur == -1)))
+					cur = index;
+		index++;
+		stack_a = stack_a->next;
+	}
+	if (cur >= depth / 2)
+		while (--cur > depth / 2)
+			ft_reverse_rotate_a(stack_a_head, NULL, 1);
+	else
+		while (--cur >= 0)
+			ft_rotate_a(stack_a_head, NULL, 1);
 }
 
 void			fill_stack_b(t_list **stack_a_head, t_list **stack_b_head)
 {
 	t_list		*stack_a;
 	t_list		*stack_b;
-	long int	median;
+	long int	threshold;
 
 	if (stack_a_head == NULL || stack_b_head == NULL)
 		return ;
 	stack_a = *stack_a_head;
 	stack_b = *stack_b_head;
-	median = 2147483647;
 	while (stack_a != NULL)
 	{
-		median = ft_find_median(stack_a);
-		if (*((long int *)(stack_a->content)) <= median)
-			ft_push_b(&stack_a, &stack_b, 1);
-		else if (ft_are_top_two_smallest(stack_a))
-			ft_swap_a(&stack_a, NULL, 1);
-		else
-		{
-			if (ft_next_to_send_is_on_top(stack_a, median))
-				ft_rotate_a(&stack_a, NULL, 1);
-			else
-				ft_reverse_rotate_a(&stack_a, NULL, 1);
-		}
+		threshold = ft_find_threshold(stack_a);
+		ft_move_stack(stack_a, &stack_a, threshold, ft_stack_max(stack_a));
+		ft_push_b(&stack_a, &stack_b, 1);
+		if (*((long int *)(stack_b->content)) <= threshold)
+			ft_rotate_b(NULL, &stack_b, 1);
 	}
 	*stack_a_head = stack_a;
 	*stack_b_head = stack_b;

@@ -6,7 +6,7 @@
 /*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 06:08:34 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/13 19:34:33 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/16 02:44:37 by mmousson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	apply_movement(t_list **s_a_head, t_list **s_b_head, char *line)
 		{"ss", ft_swap_s, NULL}, {"pa", ft_push_a, NULL},
 		{"pb", ft_push_b, NULL}, {"ra", ft_rotate_a, NULL},
 		{"rb", ft_rotate_b, NULL}, {"rr", ft_rotate_r, NULL},
-		{"rra", ft_reverse_rotate_a, NULL}, {"rrb", ft_reverse_rotate_a, NULL},
+		{"rra", ft_reverse_rotate_a, NULL}, {"rrb", ft_reverse_rotate_b, NULL},
 		{"rrr", ft_reverse_rotate_r, NULL}, {NULL, NULL, NULL}
 	};
 	const t_matcher			*ptr;

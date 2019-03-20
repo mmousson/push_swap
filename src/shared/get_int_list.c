@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_int_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 02:13:27 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/16 03:25:46 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/20 19:17:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_list			*ft_get_int_list(int argc, char **argv)
 		ft_lstpush(&result, ft_lstnew(content, sizeof(long int)));
 		ft_memdel((void **)&(content));
 	}
-	if (ft_has_duplicate_entries(result))
+	if ((i = ft_has_duplicate_entries(result)) == 1)
 		return (ft_free_samere(result, NULL));
 	return (result);
 }

@@ -13,8 +13,10 @@
 CC = gcc
 NAME = libft.a
 HEADER = libft.h
-LOGFOLDER = ~/libft_logs
+vpath %.c %(dir MAKEFILE_LIST)
+OBJDIR = .o
 CFLAGS = -Wall -Wextra -Werror -I./includes
+CPPFLAGS += -MMD -MP
 
 SRC =	ft_memset.c				\
 		ft_bzero.c				\
@@ -91,45 +93,35 @@ SRC =	ft_memset.c				\
 		ft_fabs.c				\
 		get_next_line.c
 
-OBJ = $(SRC:.c=.o)
-
-.NOTPARALLEL:
+OBJ = $(subst .c,.o,$(addprefix ./$(OBJDIR)/,$(SRC)))
+DEPS = $(subst .c,.d,$(addprefix ./$(OBJDIR)/,$(SRC)))
 
 all: $(NAME)
-	@if [ ! -e libft_link ]; then \
-		printf "\033[1;31m        [LIBFT: NOTHING TO BE DONE]\033[0m\n"; \
-	fi;
-	@rm -f libft_link
 
-%.o: %.c
-	@if [ ! -e libft_link ]; then \
-		rm -rf $(LOGFOLDER) \
-		/bin/mkdir $(LOGFOLDER) \
-		/bin/echo ""; \
-		/bin/echo -n "COMPILING LIBFT STATIC LIBRARY..."; \
-	fi;
-	@/usr/bin/touch libft_link
-	@$(CC) -c $< $(CFLAGS) -o $@ 2> $(LOGFOLDER)/tmp.log || /usr/bin/touch $(LOGFOLDER)/tmp.errors
-	@if test -e $(LOGFOLDER)/tmp.errors; then /bin/cat $(LOGFOLDER)/tmp.log; elif test -s$(LOGFOLDER)/tmp.log; then /bin/cat $(LOGFOLDER)/tmp.log; fi;
-	@rm -f $(LOGFOLDER)/tmp.log && rm -f $(LOGFOLDER)/tmp.errors
+$(OBJDIR):
+	@$(shell mkdir -p $(OBJDIR))
+
+$(OBJDIR)/%.o: %.c | $(OBJDIR)
+	@$(shell mkdir -p $(dir $@))
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 $(NAME): $(OBJ)
-	@if [ -e libft_link ]; then \
-		ar rc $(NAME) $(OBJ); \
-		ranlib $(NAME); \
-		echo "	\x1b[1;32m[LIBFT READY]\x1b[0m\n"; \
-	fi;
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	@printf "\033[1;32m[LIBFT READY]\033[0m\n"
 
 clean:
-	@rm -f $(OBJ)
-	@echo "\x1b[1;33m[LIBFT CLEANED]\x1b[0m"
+	@$(RM) $(OBJ) $(DEPS)
+	@printf "\033[1;33m[LIBFT CLEANED]\033[0m\n"
 
 fclean:
-	@rm -f $(NAME)
-	@rm -f $(OBJ)
-	@echo "\x1b[1;33m[LIBFT CLEANED]\x1b[0m"
-	@echo "\x1b[1;35m[LIBFT LIBRARY DELETED]\x1b[0m"
+	@$(RM) $(OBJ) $(DEPS)
+	@printf "\033[1;33m[LIBFT CLEANED]\033[0m\n"
+	@$(RM) $(NAME)
+	@printf "\033[1;35m[LIBFT LIBRARY DELETED]\033[0m\n"
 
 re: fclean all
 
-.PHONY: all clean fclean re log_check libft
+.NOTPARALLEL:
+.PHONY: all clean fclean re libft
+-include $(DEPS)

@@ -90,6 +90,7 @@ SRC =	ft_memset.c				\
 		ft_clamp.c				\
 		ft_strdivide_two.c		\
 		ft_strendswith.c		\
+		ft_strremove_at.c		\
 		ft_fabs.c				\
 		get_next_line.c
 

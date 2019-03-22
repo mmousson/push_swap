@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 02:11:28 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/12 06:36:05 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/22 19:32:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void				ft_putllong(long long ll);
 void				ft_putfloat(float f);
 size_t				ft_strlen(const char *str);
 void				ft_bzero(void *s, size_t n);
-long int			ft_atol(const char *s);
+long int			ft_atol(const char *s, int *error);
 int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
@@ -88,6 +88,7 @@ void				*ft_rotate_left(void *array, size_t array_size, size_t n,
 						size_t data_size);
 int					get_next_line(const int fd, char **line);
 int					ft_strendswith(char *str, const char *end);
+void				ft_strremove_at(char *str, size_t index);
 
 typedef	struct		s_list
 {

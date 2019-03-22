@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 02:13:27 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/20 19:17:06 by marvin           ###   ########.fr       */
+/*   Updated: 2019/03/22 19:19:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static int		ft_check_args(int argc, char **argv)
 		tmp = argv[i];
 		while (*tmp != '\0')
 		{
-			if (!ft_isdigit(*tmp) && *tmp != ' ')
+			if (!ft_isdigit(*tmp) && *tmp != ' '
+				&& *tmp != '-' && *tmp != '+')
 				return (0);
 			tmp++;
 		}
@@ -64,9 +65,11 @@ static int		ft_has_duplicate_entries(t_list *arg_list)
 t_list			*ft_get_int_list(int argc, char **argv)
 {
 	int			i;
+	int			error;
 	t_list		*result;
 	long int	*content;
 
+	error = 0;
 	result = NULL;
 	if (!ft_check_args(argc, argv))
 		return (NULL);
@@ -75,8 +78,8 @@ t_list			*ft_get_int_list(int argc, char **argv)
 	{
 		if ((content = (long int *)ft_memalloc(sizeof(long int))) == NULL)
 			return (ft_free_samere(result, NULL));
-		*content = ft_atol(argv[i]);
-		if (*content > INT_MAX || *content < INT_MIN)
+		*content = ft_atol(argv[i], &error);
+		if (*content > INT_MAX || *content < INT_MIN || error == 1)
 			return (ft_free_samere(result, content));
 		ft_lstpush(&result, ft_lstnew(content, sizeof(long int)));
 		ft_memdel((void **)&(content));

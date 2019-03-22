@@ -3,15 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   solve_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmousson <mmousson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 04:23:08 by mmousson          #+#    #+#             */
-/*   Updated: 2019/03/16 04:25:09 by mmousson         ###   ########.fr       */
+/*   Updated: 2019/03/22 19:36:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
+
+static char		*clean(char *str)
+{
+	size_t	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == ' ')
+			ft_strremove_at(str, i);
+	}
+	return (str);
+}
 
 static void		delete_last(char *buffer)
 {
@@ -21,7 +34,7 @@ static void		delete_last(char *buffer)
 		ft_bzero(pos - 3, 4);
 }
 
-int				brute_force(t_holder *holder, int moves, char *result,
+static int		brute_force(t_holder *holder, int moves, char *result,
 	char *tmp)
 {
 	int		i;
@@ -71,7 +84,7 @@ void			solve_brute_force(t_list **stack_a_head, t_list **stack_b_head)
 		ft_bzero(tmp, 128);
 		if (brute_force(&holder, 0, moves, tmp))
 		{
-			ft_putendl(moves);
+			ft_putstr(clean(moves));
 			return ;
 		}
 	}
